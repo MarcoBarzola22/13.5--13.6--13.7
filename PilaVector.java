@@ -5,8 +5,6 @@ public class PilaVector {
     private int cima;
     private Vector listaPila;
 
-
-
     public PilaVector(){
         cima = -1;
         listaPila = new Vector(Inicial);
@@ -25,6 +23,7 @@ public class PilaVector {
         Object aux;
         if (isPVacia()){
             System.out.println("Pila vacía, no se puede extraer.");
+            return null;
         }
         aux = listaPila.elementAt(cima);
         listaPila.removeElementAt(cima);
@@ -35,6 +34,7 @@ public class PilaVector {
     public Object cimaPila(){
         if (isPVacia()){
             System.out.println("Pila vacía, no se puede extraer.");
+            return null;
         }
         return listaPila.elementAt(cima);
     }
@@ -44,6 +44,5 @@ public class PilaVector {
             quitar();
         }
     }
-
 
 }

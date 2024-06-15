@@ -48,5 +48,4 @@ public class Nodo {
         throw new UnsupportedOperationException("Unimplemented method 'nuevoValor'");
     }
 
-    
 }

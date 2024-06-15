@@ -1,10 +1,10 @@
-public class ArbolBinarioBusqueda extends ArbolBinario{
+public class ArbolBinarioBusqueda extends ArbolBinario {
 
-    public ArbolBinarioBusqueda(){
+    public ArbolBinarioBusqueda() {
         super();
     }
 
-    public ArbolBinarioBusqueda(Nodo raiz){
+    public ArbolBinarioBusqueda(Nodo raiz) {
         super(raiz);
     }
 
@@ -22,7 +22,7 @@ public class ArbolBinarioBusqueda extends ArbolBinario{
         if (raizSub == null) {
             return null;
         } else if (buscado.igualQue(raizSub.getNodo())) {
-            return raiz;
+            return raizSub;
         } else if (buscado.menorQue(raizSub.getNodo())) {
             return localizar(raizSub.getSubArbolIzq(), buscado);
         } else {
@@ -36,7 +36,7 @@ public class ArbolBinarioBusqueda extends ArbolBinario{
         raiz = insertar(raiz, dato);
     }
 
-    
+
     protected Nodo insertar(Nodo raizSub, Comparador dato) throws Exception {
 
         if (raizSub == null) {
@@ -44,7 +44,7 @@ public class ArbolBinarioBusqueda extends ArbolBinario{
         } else if (dato.menorQue(raizSub.getNodo())) {
             Nodo iz;
             iz = insertar(raizSub.getSubArbolIzq(), dato);
-            raizSub.setRamaIzq(raizSub);
+            raizSub.setRamaIzq(iz);
         } else if (dato.mayorQue(raizSub.getNodo())) {
             Nodo dr;//nodo derecho
             dr = insertar(raizSub.getSubArbolDer(), dato);
@@ -61,28 +61,28 @@ public class ArbolBinarioBusqueda extends ArbolBinario{
         raiz = eliminar(raiz, dato);
     }
 
-  
+
     protected static Nodo eliminar(Nodo raizSub, Comparador dato) throws Exception {
-        
+
         if (raizSub == null) {
             throw new Exception("No encontrado el nodo con la clave");
         } else if (dato.menorQue(raizSub.getNodo())) {
             Nodo iz;
             iz = eliminar(raizSub.getSubArbolIzq(), dato);
-            raizSub.setRamaIzq(raizSub);
+            raizSub.setRamaIzq(iz);
         } else if (dato.mayorQue(raizSub.getNodo())) {
             Nodo dr;
             dr = eliminar(raizSub.getSubArbolDer(), dato);
             raizSub.setRamaDer(dr);
         } else {
-            
+
             Nodo q;
-            q = raizSub; 
+            q = raizSub;
             if (q.getSubArbolIzq() == null) {
                 raizSub = q.getSubArbolDer();
             } else if (q.getSubArbolDer() == null) {
                 raizSub = q.getSubArbolIzq();
-            } else { 
+            } else {
                 q = reemplazar(q);
             }
             q = null;
@@ -90,11 +90,11 @@ public class ArbolBinarioBusqueda extends ArbolBinario{
         return raizSub;
     }
 
-   
+
     private static Nodo reemplazar(Nodo act) {
         Nodo a, p;
         p = act;
-        a = act.getSubArbolIzq(); 
+        a = act.getSubArbolIzq();
         while (a.getSubArbolDer() != null) {
             p = a;
             a = a.getSubArbolDer();
@@ -109,4 +109,3 @@ public class ArbolBinarioBusqueda extends ArbolBinario{
     }
 
 }
-    
