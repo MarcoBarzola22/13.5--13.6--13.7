@@ -1,49 +1,122 @@
 import java.util.Scanner;
+import ArbolBinario.*;
+
 
 public class Main {
 
-    public static void main(String[] args) {
-        int controlar = 1;
-        String centro, izq, dcho;
+
+    public static void Insertar(){
+        String name1, name2, name3;
+        Nodo a1,a2,a;
 
         Scanner scc = new Scanner(System.in);
-        PilaVector pila = new PilaVector();
-        ArbolBinario arbol = null;
 
-        while (controlar == 1) {
-            System.out.println("Ingrese el nombre del SubArbol izquierdo:");
-            izq = scc.nextLine();
+        try{
+            System.out.println("Ingrese el nombre del SubArbol Izquierdo: \n");
+                name1 = scc.nextLine();
 
-            System.out.println("Ingrese el nombre del SubArbol derecho:");
-            dcho = scc.nextLine();
+            System.out.println("Ingrese el nombre del SubArbol Derecho \n");
+                name2 = scc.nextLine();
 
-            System.out.println("Ingrese el nombre del arbol raiz:");
-            centro = scc.nextLine();
+            System.out.println("Ingrese el nombre del SubArbol Raiz:  \n");
+                name3 = scc.nextLine();
 
-            Nodo a1 = ArbolBinario.nuevoArbol(null, izq, null);
-            Nodo a2 = ArbolBinario.nuevoArbol(null, dcho, null);
-            Nodo a = ArbolBinario.nuevoArbol(a1, centro, a2);
-
-            pila.insertar(a);
-
-            arbol = new ArbolBinario(a);
-
-            System.out.println("Recorrido PreOrden:");
-            ArbolBinario.preOrden(arbol.getRaiz());
-            System.out.println("------");
-            System.out.println("Recorrido InOrden:");
-            ArbolBinario.inOrden(arbol.getRaiz());
-            System.out.println("------");
-            System.out.println("Recorrido PostOrden:");
-            ArbolBinario.postOrden(arbol.getRaiz());
-            System.out.println("------");
-
-            System.out.println("¿Quiere seguir cargando? Presione:");
-            System.out.println("1) Si, si desea seguir.");
-            System.out.println("2) No, si no desea seguir.");
-            controlar = scc.nextInt();
-            scc.nextLine(); // Limpiar el buffer
+                a1 = ArbolBinario.nuevoArbol(null, name1, null);
+                a2 = ArbolBinario.nuevoArbol(null, name2, null);
+                a = ArbolBinario.nuevoArbol(a1, name3, a2);
+                pila.insertar(a);
+        } 
+        catch (Exception e){
+            System.out.println("No se pudo insertar" + e.getCause());
         }
-        scc.close();
     }
+
+
+    public static void Buscar(){
+
+        try{
+            Estudiante estudianteBuscado;
+            Nodo n = ArbolBinarioBusqueda.buscar(new Estudiante(10));
+
+            if ((n != null) && (n.getNodo() instanceof Estudiante)){
+                estudianteBuscado = (Estudiante) n.getNodo();
+                System.out.println("Buscado: " + estudianteBuscado.toString());
+            } else {
+                System.out.println("Buscado: NO ENCONTRADO");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al Buscar! " + e.getMessage());
+        }
+
+        try{
+            ArbolBinarioBusqueda.eliminar(new Estudiante(15));
+        }catch(Exception e){
+            System.out.println("Error al Eliminar! " + e.getMessage());
+        }
+
+    }
+
+    public static void Recorrido(){
+        try {
+            //Recorrido
+            System.out.println("\nPreorden");
+            ArbolBinario.preOrden(ArbolBinarioBusqueda.getRaiz());
+
+        } catch (Exception e) {
+            System.out.println("Error al recorrer! " + e.getMessage());
+        }
+        
+        try {
+            //Recorrido
+            System.out.println("\nInorden");
+            ArbolBinario.inOrden(ArbolBinario.getRaiz());
+            
+
+        } catch (Exception e) {
+            System.out.println("Error al recorrer! " + e.getMessage());
+        }
+        
+        try {
+            System.out.println("\nPostorden");
+            ArbolBinario.postOrden(ArbolBinario.getRaiz());
+
+        } catch (Exception e) {
+            System.out.println("Error al recorrer! " + e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        int opc;
+        Scanner scc = new Scanner(System.in);
+        
+        System.out.println("Bienvenido!\n");
+
+
+        do{
+            System.out.println("Insertar\n");
+            System.out.println("2) Buscar / Eliminar\n");
+            System.out.println("3) Mostrar Recorridos\n");
+            opc = scc.nextLine();
+
+
+            switch (opc){
+
+                case 1:
+                    Insertar();
+                    break;
+
+                case 2:
+                    Buscar();
+                    break;
+
+                case 3:
+                    Recorrido();
+                    break;
+            }
+
+
+        }while(opc == 5);
+
+    }
+
 }

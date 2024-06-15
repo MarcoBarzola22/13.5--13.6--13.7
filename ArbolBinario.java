@@ -1,5 +1,5 @@
 public class ArbolBinario {
-    protected Nodo raiz;
+    protected static Nodo raiz;
 
     public ArbolBinario() {
         raiz = null;
@@ -9,7 +9,7 @@ public class ArbolBinario {
         this.raiz = raiz;
     }
 
-    public Nodo getRaiz() {
+    public static Nodo getRaiz() {
         return raiz;
     }
 
@@ -21,28 +21,39 @@ public class ArbolBinario {
         return new Nodo(ramaIzq, dato, ramaDer);
     }
 
-    // Recorridos
+    // CREACION DE RECORRIDOS
+
     public static void preOrden(Nodo raiz) {
         if (raiz != null) {
             raiz.visitar();
-            preOrden(raiz.getSubArbolIzdo());
-            preOrden(raiz.getSubArbolDcho());
+            preOrden(raiz.getSubArbolIzq());
+            preOrden(raiz.getSubArbolDer());
         }
     }
 
     public static void inOrden(Nodo raiz) {
         if (raiz != null) {
-            inOrden(raiz.getSubArbolIzdo());
+            inOrden(raiz.getSubArbolIzq());
             raiz.visitar();
-            inOrden(raiz.getSubArbolDcho());
+            inOrden(raiz.getSubArbolDer());
         }
     }
 
     public static void postOrden(Nodo raiz) {
         if (raiz != null) {
-            postOrden(raiz.getSubArbolIzdo());
-            postOrden(raiz.getSubArbolDcho());
+            postOrden(raiz.getSubArbolIzq());
+            postOrden(raiz.getSubArbolDer());
             raiz.visitar();
         }
     }
+
+    public static int numNodos(Nodo raiz){
+        if(raiz == null){
+            return 0;
+        }
+        else{
+            return 1 +numNodos(raiz.getSubArbolIzq()) + numNodos(raiz.getSubArbolDer());
+        }
+    }
+
 }

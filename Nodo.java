@@ -1,45 +1,52 @@
 public class Nodo {
     protected Object dato;
-    protected Nodo izdo;
-    protected Nodo dcho;
+    protected Nodo izq;
+    protected Nodo der;
 
-    public Nodo(Object valor) {
-        this.dato = valor;
-        this.izdo = null;
-        this.dcho = null;
+    public Nodo(Object dato) {
+        this.dato = dato;
+        this.izq = null;
+        this.der = null;
     }
 
-    public Nodo(Nodo ramaIzdo, Object valor, Nodo ramaDcho) {
-        this(valor);
-        izdo = ramaIzdo;
-        dcho = ramaDcho;
+    public Nodo(Nodo ramaIzq, Object dato, Nodo ramaDer) {
+        this(dato);
+        izq = ramaIzq;
+        der = ramaDer;
     }
 
     public Object getNodo() {
         return dato;
     }
 
-    public Nodo getSubArbolIzdo() {
-        return izdo;
+    public Nodo getSubArbolIzq() {
+        return izq;
     }
 
-    public Nodo getSubArbolDcho() {
-        return dcho;
+    public Nodo getSubArbolDer() {
+        return der;
     }
 
-    public void setValor(Object d) {
+    public void setDato(Object d) {
         dato = d;
     }
 
-    public void setRamaIzdo(Nodo n) {
-        izdo = n;
+    public void setRamaIzq(Nodo n) {
+        izq = n;
     }
 
-    public void setRamaDcho(Nodo n) {
-        dcho = n;
+    public void setRamaDer(Nodo n) {
+        der = n;
     }
 
-    void visitar() {
+    public void visitar() {
         System.out.print(dato + " ");
     }
+
+    public void nuevoValor(Object nodo) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'nuevoValor'");
+    }
+
+    
 }
